@@ -1,12 +1,32 @@
 {
   "name": "@webexdx/koa-wrap",
-  "version": "1.1.1",
+  "version": "1.3.5",
   "description": "A wrapper package around koa framework",
-  "main": "build/src/index.js",
-  "types": "build/src/index.d.ts",
   "files": [
     "/build"
   ],
+   "exports": {
+    "./server": {
+      "import": "./build/src/server/index.js",
+      "require": "./build/src/server/index.js",
+      "types": "./build/src/server/index.d.ts"
+    },
+    "./middlewares": {
+      "import": "./build/src/middlewares/index.js",
+      "require": "./build/src/middlewares/index.js",
+      "types": "./build/src/middlewares/index.d.ts"
+    },
+    "./errors": {
+      "import": "./build/src/errors/index.js",
+      "require": "./build/src/errors/index.js",
+      "types": "./build/src/errors/index.d.ts"
+    },
+    "./http-codes": {
+      "import": "./build/src/http-codes/index.js",
+      "require": "./build/src/http-codes/index.js",
+      "types": "./build/src/http-codes/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "test": "npm run test",
