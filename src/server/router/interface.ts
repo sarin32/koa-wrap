@@ -12,8 +12,19 @@ export interface GroupRoute {
 export interface RouteHandler {
   path: string; // Path for the route
   handler: KWMiddleware; // Handler for the route
+  method: HTTPMethod;
   middlewares?: KWMiddleware | KWMiddleware[]; // Array of middleware functions for this route
 }
 
 // A router can either be an array of `Route` or `RouteWithHandler`
 export type Router = GroupRoute[] | RouteHandler[];
+
+export enum HTTPMethod {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  DELETE = 'delete',
+  PATCH = 'patch',
+  OPTIONS = 'options',
+  HEAD = 'head',
+}
