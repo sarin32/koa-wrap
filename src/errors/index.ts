@@ -65,3 +65,14 @@ export class ForbiddenError extends BaseError {
     });
   }
 }
+
+export class NotFoundError extends BaseError {
+  constructor(message: string, errorCode?: string) {
+    super({
+      message,
+      errorCode,
+      isToBeReported: false,
+      statusCode: HttpStatusCode.NOT_FOUND,
+    });
+  }
+}
