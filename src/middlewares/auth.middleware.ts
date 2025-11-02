@@ -1,5 +1,5 @@
 import { Context, Next } from 'koa';
-import { AuthorizationError, BadRequestError } from '../errors';
+import { AuthorizationError } from '../errors';
 import * as jwt from 'jsonwebtoken';
 import { JwtPayload, Secret } from 'jsonwebtoken';
 
@@ -24,12 +24,15 @@ async function validateSignature(token: string, secret: Secret) {
 
 export function authMiddleware(tokenConfig: TokenConfig) {
   return async (ctx: Context, next: Next) => {
-    const authToken = ctx.get('Authorization');
+
+    // Try to get token from cookie or Authorization header
+    const authToken = ctx.cookies.get('access_token') || ctx.get('Authorization');
+
     if (!authToken)
-      throw new BadRequestError('Authorization header is not found');
+      throw new AuthorizationError('Authorization header is not found');
 
     const token = authToken.split(' ').at(1);
-    if (!token) throw new BadRequestError('Authorization header is invalid');
+    if (!token) throw new AuthorizationError('Authorization header is invalid');
 
     const { invalidToken, payload, tokenExpired } = await validateSignature(
       token,
