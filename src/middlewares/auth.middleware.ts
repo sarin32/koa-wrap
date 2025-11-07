@@ -24,9 +24,9 @@ async function validateSignature(token: string, secret: Secret) {
 
 export function authMiddleware(tokenConfig: TokenConfig) {
   return async (ctx: Context, next: Next) => {
-
     // Try to get token from cookie or Authorization header
-    const authToken = ctx.cookies.get('access_token') || ctx.get('Authorization');
+    const authToken =
+      ctx.cookies.get('access_token') || ctx.get('Authorization');
 
     if (!authToken)
       throw new AuthorizationError('Authorization header is not found');

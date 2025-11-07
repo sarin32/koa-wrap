@@ -4,6 +4,6 @@ export {
   KWMiddleware,
   GroupRoute,
   RouteHandler,
-  HTTPMethod
+  HTTPMethod,
 } from './router/interface';
 export { CreateServerParams } from './server/interface';
